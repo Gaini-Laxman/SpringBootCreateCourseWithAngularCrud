@@ -1,0 +1,23 @@
+pipeline {
+    agent any
+    stages {
+        stage('Build') {
+            when {
+                expression { BRANCH_NAME == 'feature' }
+            }
+            steps {
+                // Execute build steps only for the feature branch
+                // Insert your build steps here
+            }
+        }
+        stage('Deploy') {
+            when {
+                expression { TAG_NAME != null }
+            }
+            steps {
+                // Deploy artifacts only when building a tag
+                // Insert your deployment steps here
+            }
+        }
+    }
+}
