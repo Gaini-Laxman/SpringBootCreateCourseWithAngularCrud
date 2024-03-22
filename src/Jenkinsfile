@@ -1,24 +1,37 @@
 pipeline {
     agent any
-
     stages {
-        stage('Build') {
-            when {
-                expression { BRANCH_NAME == 'feature' }
-            }
+        stage('DELETION') {
             steps {
-                sh 'echo "Building on feature branch"'
-                // Add your build steps here
+                echo '--REMOVING REPOSITORY IF ALREADY EXIST --'
+                sh "sudo rm -rf javafullstackguru"
             }
         }
-
-        stage('Deploy') {
-            when {
-                expression { TAG_NAME != null }
-            }
+       stage('CLONE') {
             steps {
-                sh 'echo "Deploying artifacts"'
-                // Add your deployment steps here
+                echo '--CLONE STAGE EXECUTION ---'
+    sh "git clone https://github.com/Gaini-Laxman/SpringBootCreateCourseWithAngularCrud.git"
+            }
+        }
+        stage('TEST1') {
+            steps {
+                echo '--TEST1 STAGE EXECUTION --'
+            }
+        }
+        stage('TEST2') {
+            steps {
+                echo '--TEST2 STAGE EXECUTION --'
+            }
+        }
+        stage('BUILD') {
+            steps {
+    echo '--BUILD STAGE EXECUTION --'
+    sh "node javafullstackguru/javafullstackguru"
+            }
+        }
+  stage('DEPLOY') {
+            steps {
+    echo '--WILL SEE IN NEXT PART --'
             }
         }
     }
