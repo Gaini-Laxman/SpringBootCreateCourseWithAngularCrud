@@ -1,22 +1,24 @@
 pipeline {
     agent any
+
     stages {
         stage('Build') {
             when {
                 expression { BRANCH_NAME == 'feature' }
             }
             steps {
-                // Execute build steps only for the feature branch
-                // Insert your build steps here
+                sh 'echo "Building on feature branch"'
+                // Add your build steps here
             }
         }
+
         stage('Deploy') {
             when {
                 expression { TAG_NAME != null }
             }
             steps {
-                // Deploy artifacts only when building a tag
-                // Insert your deployment steps here
+                sh 'echo "Deploying artifacts"'
+                // Add your deployment steps here
             }
         }
     }
